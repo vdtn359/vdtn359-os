@@ -10,7 +10,10 @@
     "build": "tsc -b packages",
     "prepare": "npm run build",
     "postinstall": "link-parent-bin > /dev/null",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "publish:major": "lerna publish major",
+    "publish:minor": "lerna publish minor",
+    "publish:patch": "lerna publish patch"
   },
   "husky": {
     "hooks": {
