@@ -1,0 +1,19 @@
+{
+    "name": "@vdtn359/utils",
+    "version": "0.0.0",
+    "description": "Tuan's general utils",
+    "type": "dist/index.d.ts",
+    "main": "dist/index.js",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "ttsc -b tsconfig.build.json"
+    },
+    "dependencies": {
+        "date-fns": "2.12.0",
+        "lodash": "4.17.15",
+        "uuid": "7.0.3",
+        "uuid-by-string": "3.0.2"
+    }
+}
