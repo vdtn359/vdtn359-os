@@ -1,15 +1,18 @@
 {
-  "files": [],
-  "compilerOptions": {
-    "preserveWatchOutput": true,
-    "incremental": true
-  },
-  "references": [
-    {
-      "path": "./utils/tsconfig.build.json"
+    "files": [],
+    "compilerOptions": {
+        "preserveWatchOutput": true,
+        "incremental": true
     },
-    {
-      "path": "./fp/tsconfig.build.json"
-    }
-  ]
+    "references": [
+        {
+            "path": "./utils/tsconfig.build.json"
+        },
+        {
+            "path": "./fp/tsconfig.build.json"
+        },
+        {
+            "path": "./transformer/tsconfig.build.json"
+        }
+    ]
 }
