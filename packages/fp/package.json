@@ -1,0 +1,14 @@
+{
+    "name": "@vdtn359/fp",
+    "version": "1.0.0",
+    "description": "Tuan's functional programming utils",
+    "type": "dist/index.d.ts",
+    "main": "dist/index.js",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "ttsc -b tsconfig.build.json"
+    },
+    "dependencies": {}
+}
