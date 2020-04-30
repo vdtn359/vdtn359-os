@@ -1,4 +1,5 @@
 import { Expose } from 'src/decorators';
+import { Exclude } from 'src/decorators/exclude';
 
 export class Book {
 	constructor({ alias }) {
@@ -11,4 +12,7 @@ export class Book {
 	name: string;
 
 	nameUpperCase: string;
+
+	@Exclude()
+	isbn: string;
 }

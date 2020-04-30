@@ -46,20 +46,3 @@ export function Expose(options: ExposeOptions = {}): PropertyDecorator {
 		Reflect.defineMetadata(METADATA_KEY, metadata, metadataTarget);
 	};
 }
-
-export function Exclude(): PropertyDecorator {
-	return (target: Record<string, any>, property: string | symbol) => {
-		if (typeof property != 'string') {
-			return;
-		}
-		const metadataTarget = target.constructor || target;
-		const metadata: Map<string, ExposeOptions> = Reflect.getMetadata(
-			METADATA_KEY,
-			metadataTarget
-		);
-		if (!metadata || !metadata.has(property)) {
-			return;
-		}
-		metadata.delete(property);
-	};
-}
