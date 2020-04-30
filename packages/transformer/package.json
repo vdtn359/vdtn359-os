@@ -12,5 +12,8 @@
     },
     "dependencies": {
         "reflect-metadata": "0.1.13"
+    },
+    "devDependencies": {
+        "lodash": "4.17.15"
     }
 }

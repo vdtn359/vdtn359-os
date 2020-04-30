@@ -6,3 +6,4 @@ export * as date from 'src/date';
 export * as proxy from 'src/proxy';
 export * as arr from 'src/array';
 export * as env from 'src/env';
+export * as fp from 'src/fp';

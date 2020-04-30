@@ -9,9 +9,6 @@
             "path": "./utils/tsconfig.build.json"
         },
         {
-            "path": "./fp/tsconfig.build.json"
-        },
-        {
             "path": "./transformer/tsconfig.build.json"
         }
     ]

@@ -14,4 +14,4 @@ export const waterfall = (...fns) => (...args) => {
 
 export const compose = (...fns) => pipeline(...fns.reverse());
 
-export const binary = fn => (x, y) => fn(x, y);
+export const binary = (fn) => (x, y) => fn(x, y);
