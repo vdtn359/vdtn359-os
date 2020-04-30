@@ -8,6 +8,7 @@
     "scripts": {
         "dev": "chokidar --silent \"packages/*/src/**/*\" --initial -c \"time ts-transpile -b packages\"",
         "build": "tsc -b packages",
+        "test:coverage": "jest --coverage",
         "prepare": "npm run build",
         "postinstall": "link-parent-bin > /dev/null",
         "publish": "lerna publish",

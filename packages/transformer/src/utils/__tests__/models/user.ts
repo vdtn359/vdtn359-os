@@ -1,4 +1,5 @@
 import { Expose, ExposeAll } from 'src/decorators/expose';
+import { Exclude } from 'src/decorators/exclude';
 
 @ExposeAll()
 export class User {
@@ -8,14 +9,38 @@ export class User {
 	@Expose()
 	lastName: string;
 
+	@Expose()
+	city?: string;
+
 	@Expose({
 		toPlain: false,
 	})
-	password: string;
+	password?: string;
 
 	@Expose()
 	dob?: Date;
 
+	@Expose({
+		type: User,
+	})
+	friends?: User[];
+
 	@Expose()
-	friend?: User;
+	manager?: User;
+
+	@Expose({
+		groups: ['secret'],
+	})
+	secret?: string;
+
+	@Exclude({
+		groups: ['secret'],
+	})
+	exclude?: string;
+
+	@Expose({
+		groups: ['excludeIf'],
+		excludeIf: (key, value) => value === 1,
+	})
+	excludeIf?: number;
 }

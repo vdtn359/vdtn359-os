@@ -1,8 +1,23 @@
 import { Expose } from 'src/decorators/expose';
 
-export function Exclude(): PropertyDecorator {
+export type ExcludeOptions = {
+	groups?: string[];
+};
+
+export function Exclude(options: ExcludeOptions = {}): PropertyDecorator {
 	return Expose({
-		toPlain: false,
-		toClass: false,
+		toPlain: !!options.groups,
+		toClass: !!options.groups,
+		excludeIf: options.groups
+			? (key, value, exposeOptions, transformOptions) => {
+					const groups = transformOptions.groups;
+					if (!groups) {
+						return false;
+					}
+					return options.groups.some((group) =>
+						groups.includes(group)
+					);
+			  }
+			: undefined,
 	});
 }

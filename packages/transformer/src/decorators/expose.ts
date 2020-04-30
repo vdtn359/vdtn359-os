@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { TransformOptions } from 'src/utils';
 export const METADATA_KEY = '__TRANSFORMER_METADATA__';
 
 export type ExposeOptions = {
@@ -6,6 +7,13 @@ export type ExposeOptions = {
 	type?: any;
 	toClass?: boolean;
 	toPlain?: boolean;
+	groups?: string[];
+	excludeIf?: (
+		key: string,
+		value?: any,
+		exposeOptions?: ExposeOptions,
+		transformOptions?: TransformOptions
+	) => boolean;
 };
 
 export function ExposeAll(): ClassDecorator {
@@ -42,6 +50,23 @@ export function Expose(options: ExposeOptions = {}): PropertyDecorator {
 			type:
 				options.type ||
 				Reflect.getMetadata('design:type', target, property),
+			excludeIf: (key, value, exposeOptions, transformOptions = {}) => {
+				const excludeIf = options.excludeIf || (() => false);
+				let groupCondition = () => false;
+				if (exposeOptions.groups && !transformOptions.ignoreGroups) {
+					groupCondition = () =>
+						exposeOptions.groups.every(
+							(fieldGroup) =>
+								!(transformOptions.groups || []).includes(
+									fieldGroup
+								)
+						);
+				}
+				return (
+					excludeIf(key, value, exposeOptions, transformOptions) ||
+					groupCondition()
+				);
+			},
 		});
 		Reflect.defineMetadata(METADATA_KEY, metadata, metadataTarget);
 	};

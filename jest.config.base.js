@@ -20,6 +20,7 @@ module.exports = (dirname) => {
 		preset: 'ts-jest',
 		moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 		testURL: 'http://localhost',
+		testRegex: '/__tests__/.*\\.(spec)\\.[tj]sx?$',
 		moduleNameMapper: pathsToModuleNameMapper(paths, {
 			prefix: `${dirname}/`,
 		}),

@@ -3,6 +3,21 @@ import { ExposeOptions } from 'src/decorators';
 
 export type TransformOptions = {
 	ignoreDecorators?: boolean;
+	ignoreGroups?: true;
+	excludeIf?: (
+		key,
+		value,
+		exposeOptions: ExposeOptions,
+		transformOptions: TransformOptions
+	) => boolean;
+	transform?: (key, value, exposeOptions: ExposeOptions) => any;
+	transformDate?: boolean;
+	groups?: string[];
+};
+
+const defaultOptions: TransformOptions = {
+	transformDate: true,
+	ignoreDecorators: false,
 };
 
 export enum TransformType {
@@ -15,16 +30,17 @@ export function toPlain(
 	constructor = getConstructorFromObject(object),
 	transformOptions: TransformOptions = {}
 ) {
+	transformOptions = { ...defaultOptions, ...transformOptions };
 	if (!object || typeof object !== 'object') {
 		return object;
 	}
 	if (Array.isArray(object)) {
 		return object.map((element) =>
-			toPlain(element, undefined, transformOptions)
+			toPlain(element, constructor, transformOptions)
 		);
 	}
 	if (object instanceof Date) {
-		return object.toJSON();
+		return transformOptions.transformDate ? object.toJSON() : object;
 	}
 	const metadata = getMetadata(constructor) || new Map();
 	const result = {};
@@ -32,6 +48,7 @@ export function toPlain(
 		if (
 			!shouldExpose({
 				key,
+				value,
 				metadata,
 				transformOptions,
 				transformType: TransformType.TO_PLAIN,
@@ -40,26 +57,46 @@ export function toPlain(
 			continue;
 		}
 		const exposeOptions = metadata.get(key) || {};
+		const transform: Function = transformOptions.transform
+			? transformOptions.transform
+			: (key, value) => value;
 		const as = exposeOptions.as || key;
 		result[as] =
 			value && typeof value === 'object'
 				? toPlain(value, exposeOptions.type, transformOptions)
 				: value;
+		result[as] = transform(key, result[as], exposeOptions);
 	}
 	return result;
 }
 
-export function plainToClass(
+export function toClass(
 	plainObject,
 	Class,
 	transformOptions: TransformOptions = {}
 ): typeof Class {
+	transformOptions = { ...defaultOptions, ...transformOptions };
+	if (Class === Date) {
+		return transformOptions.transformDate
+			? new Date(plainObject)
+			: plainObject;
+	}
+	if (Array.isArray(plainObject)) {
+		return plainObject.map((element) =>
+			toClass(element, Class, transformOptions)
+		);
+	}
+	if (typeof plainObject !== 'object') {
+		return plainObject;
+	}
 	const metadata = getMetadata(getConstructorFromClass(Class)) || new Map();
 	const result = Class.length ? new Class(plainObject) : new Class();
 	for (const [key, exposeOptions] of metadata.entries()) {
+		const as = exposeOptions.as || key;
 		if (
 			!shouldExpose({
 				key,
+				value: plainObject[as],
 				metadata,
 				transformOptions,
 				transformType: TransformType.PLAIN_TO_CLASS,
@@ -67,13 +104,16 @@ export function plainToClass(
 		) {
 			continue;
 		}
-		const as = exposeOptions.as || key;
+
 		if (!result[key] && plainObject[as]) {
 			const value = plainObject[as];
-			result[key] =
-				value && typeof value === 'object'
-					? plainToClass(value, exposeOptions.type, transformOptions)
-					: value;
+			const transform: Function = transformOptions.transform
+				? transformOptions.transform
+				: (key, value) => value;
+			result[key] = value
+				? toClass(value, exposeOptions.type, transformOptions)
+				: value;
+			result[key] = transform(key, result[key], exposeOptions);
 		}
 	}
 	return result;
@@ -81,33 +121,45 @@ export function plainToClass(
 
 function shouldExpose({
 	key,
+	value,
 	transformOptions,
 	metadata,
 	transformType,
 }: {
 	key: string;
+	value: any;
 	metadata: Map<string, ExposeOptions>;
 	transformOptions: TransformOptions;
 	transformType: TransformType;
 }) {
+	const exposeOptions = metadata.get(key);
+	if (
+		transformOptions.excludeIf &&
+		transformOptions.excludeIf(key, value, exposeOptions, transformOptions)
+	) {
+		return false;
+	}
 	if (transformOptions.ignoreDecorators) {
 		return true;
 	}
-	if (!metadata.has(key)) {
+	if (!exposeOptions) {
 		return false;
 	}
-
-	const exposeOptions = metadata.get(key);
+	if (
+		exposeOptions.excludeIf &&
+		exposeOptions.excludeIf(key, value, exposeOptions, transformOptions)
+	) {
+		return false;
+	}
 	if (
 		transformType === TransformType.PLAIN_TO_CLASS &&
 		!exposeOptions.toClass
 	) {
 		return false;
 	}
-	if (transformType === TransformType.TO_PLAIN && !exposeOptions.toPlain) {
-		return false;
-	}
-	return true;
+	return !(
+		transformType === TransformType.TO_PLAIN && !exposeOptions.toPlain
+	);
 }
 
 function getConstructorFromClass(object) {
