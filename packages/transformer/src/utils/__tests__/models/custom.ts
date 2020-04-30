@@ -1,5 +1,13 @@
 import { Expose } from 'src/decorators';
 
+export class Inner {
+	@Expose()
+	a: string;
+
+	@Expose()
+	b: string;
+}
+
 export class Custom {
 	@Expose({
 		as: 'alias',
@@ -14,12 +22,4 @@ export class Custom {
 
 	@Expose()
 	inner: Inner;
-}
-
-export class Inner {
-	@Expose()
-	a: string;
-
-	@Expose()
-	b: string;
 }

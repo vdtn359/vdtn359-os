@@ -1,6 +1,8 @@
 import { User } from './models/user';
 import { Mapper } from 'src/index';
 import { Book } from 'src/utils/__tests__/models/book';
+import { Custom, Inner } from './models/custom';
+import { CustomDto, InnerDto } from 'src/utils/__tests__/models/custom.dto';
 
 const sampleDate = new Date(Date.UTC(2020, 3, 30, 0, 0, 0));
 describe('Mapper', () => {
@@ -416,6 +418,49 @@ describe('Mapper', () => {
 				})
 			);
 		});
+	});
+
+	describe('class to class transformation', () => {
+		let custom = new Custom();
+		custom.customName = 'customName';
+		custom.name = 'Name';
+		custom.number = 1;
+		custom.inner = new Inner();
+		custom.inner.a = 'a';
+		custom.inner.b = 'b';
+
+		const mapper = new Mapper(Custom, CustomDto).mapDefault();
+		mapper.map('customName', 'customAlias');
+		const innerMapper = mapper.getNestedMapper('inner');
+		innerMapper.map('b', 'c');
+		const customDto = mapper.transform(custom);
+		expect(customDto).toBeInstanceOf(CustomDto);
+		expect(customDto.inner).toBeInstanceOf(InnerDto);
+		expect(JSON.stringify(customDto)).toEqual(
+			JSON.stringify({
+				customAlias: 'customName',
+				alias: 'Name',
+				number: 1,
+				inner: { a: 'a', c: 'b' },
+			})
+		);
+
+		const inverseMapper = new Mapper(CustomDto, Custom).mapDefault();
+		inverseMapper.map('customAlias', 'customName');
+		const innerInverseMapper = inverseMapper.getNestedMapper('inner');
+		innerInverseMapper.map('c', 'b');
+		custom = inverseMapper.transform(customDto);
+
+		expect(custom).toBeInstanceOf(Custom);
+		expect(custom.inner).toBeInstanceOf(Inner);
+		expect(JSON.stringify(custom)).toEqual(
+			JSON.stringify({
+				customName: 'customName',
+				name: 'Name',
+				number: 1,
+				inner: { a: 'a', b: 'b' },
+			})
+		);
 	});
 
 	describe('getMapper', () => {
