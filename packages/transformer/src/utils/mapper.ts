@@ -134,6 +134,18 @@ export class Mapper {
 		return result;
 	}
 
+	getNestedMapper(innerPath): Mapper | undefined {
+		const parts = innerPath.split('.');
+		let mapper = this;
+		for (const part of parts) {
+			if (!mapper) {
+				break;
+			}
+			mapper = mapper.mappings.get(part)?.mapper;
+		}
+		return mapper;
+	}
+
 	transformArray(object, transformOptions = {}) {
 		transformOptions = { ...defaultTransformOptions, ...transformOptions };
 		if (!Array.isArray(object)) {

@@ -1,5 +1,5 @@
 import { User } from './models/user';
-import { Mapper, toClass, toPlain } from 'src/index';
+import { Mapper } from 'src/index';
 import { Book } from 'src/utils/__tests__/models/book';
 
 const sampleDate = new Date(Date.UTC(2020, 3, 30, 0, 0, 0));
@@ -318,11 +318,17 @@ describe('Mapper', () => {
 				firstName: 'Tuan',
 				surName: 'Nguyen',
 				dateOfBirth: '2020-04-30T00:00:00.000Z',
+				friends: [
+					{
+						givenName: 'Tuan',
+						familyName: 'Nguyen',
+					},
+				],
 			};
 
-			const managerMapper = new Mapper(undefined, User).mapDefault();
-			managerMapper.map('givenName', 'firstName');
-			managerMapper.map('familyName', 'lastName');
+			const nestedMapper = new Mapper(undefined, User).mapDefault();
+			nestedMapper.map('givenName', 'firstName');
+			nestedMapper.map('familyName', 'lastName');
 			user.supervisor = {
 				givenName: 'Manager',
 				familyName: 'My',
@@ -333,16 +339,19 @@ describe('Mapper', () => {
 				.mapDefault()
 				.map('surName', 'lastName')
 				.map('dateOfBirth', 'dob')
-				.map('supervisor', 'manager', managerMapper);
+				.map('friends', 'friends', nestedMapper)
+				.map('supervisor', 'manager', nestedMapper);
 
 			const result = mapper.transform(user);
 			expect(result).toBeInstanceOf(User);
 			expect(result.manager).toBeInstanceOf(User);
+			expect(result.friends[0]).toBeInstanceOf(User);
 			expect(JSON.stringify(result)).toEqual(
 				JSON.stringify({
 					firstName: 'Tuan',
 					lastName: 'Nguyen',
 					dob: '2020-04-30T00:00:00.000Z',
+					friends: [{ firstName: 'Tuan', lastName: 'Nguyen' }],
 					manager: {
 						firstName: 'Manager',
 						lastName: 'My',
@@ -407,5 +416,12 @@ describe('Mapper', () => {
 				})
 			);
 		});
+	});
+
+	describe('getMapper', () => {
+		const mapper = new Mapper(undefined, User).mapDefault();
+		const innerMapper = mapper.getNestedMapper('manager.friends');
+		expect(innerMapper).toBeDefined();
+		expect(innerMapper).toEqual(mapper);
 	});
 });
