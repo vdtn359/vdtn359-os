@@ -10,19 +10,19 @@ export type TransformOptions = {
 		exposeOptions: ExposeOptions,
 		transformOptions: TransformOptions
 	) => boolean;
-	transform?: (key, value, exposeOptions: ExposeOptions) => any;
+	transform?: (key, value) => any;
 	transformDate?: boolean;
 	groups?: string[];
 };
 
-const defaultOptions: TransformOptions = {
+export const defaultTransformOptions: TransformOptions = {
 	transformDate: true,
 	ignoreDecorators: false,
 };
 
 export enum TransformType {
 	TO_PLAIN,
-	PLAIN_TO_CLASS,
+	TO_CLASS,
 }
 
 export function toPlain(
@@ -30,7 +30,7 @@ export function toPlain(
 	constructor = getConstructorFromObject(object),
 	transformOptions: TransformOptions = {}
 ) {
-	transformOptions = { ...defaultOptions, ...transformOptions };
+	transformOptions = { ...defaultTransformOptions, ...transformOptions };
 	if (!object || typeof object !== 'object') {
 		return object;
 	}
@@ -65,7 +65,7 @@ export function toPlain(
 			value && typeof value === 'object'
 				? toPlain(value, exposeOptions.type, transformOptions)
 				: value;
-		result[as] = transform(key, result[as], exposeOptions);
+		result[as] = transform(as, result[as]);
 	}
 	return result;
 }
@@ -75,7 +75,7 @@ export function toClass(
 	Class,
 	transformOptions: TransformOptions = {}
 ): typeof Class {
-	transformOptions = { ...defaultOptions, ...transformOptions };
+	transformOptions = { ...defaultTransformOptions, ...transformOptions };
 	if (Class === Date) {
 		return transformOptions.transformDate
 			? new Date(plainObject)
@@ -99,7 +99,7 @@ export function toClass(
 				value: plainObject[as],
 				metadata,
 				transformOptions,
-				transformType: TransformType.PLAIN_TO_CLASS,
+				transformType: TransformType.TO_CLASS,
 			})
 		) {
 			continue;
@@ -110,16 +110,14 @@ export function toClass(
 			const transform: Function = transformOptions.transform
 				? transformOptions.transform
 				: (key, value) => value;
-			result[key] = value
-				? toClass(value, exposeOptions.type, transformOptions)
-				: value;
+			result[key] = value ? toClass(value, exposeOptions.type) : value;
 			result[key] = transform(key, result[key], exposeOptions);
 		}
 	}
 	return result;
 }
 
-function shouldExpose({
+export function shouldExpose({
 	key,
 	value,
 	transformOptions,
@@ -132,7 +130,7 @@ function shouldExpose({
 	transformOptions: TransformOptions;
 	transformType: TransformType;
 }) {
-	const exposeOptions = metadata.get(key);
+	const exposeOptions = metadata?.get(key);
 	if (
 		transformOptions.excludeIf &&
 		transformOptions.excludeIf(key, value, exposeOptions, transformOptions)
@@ -151,10 +149,7 @@ function shouldExpose({
 	) {
 		return false;
 	}
-	if (
-		transformType === TransformType.PLAIN_TO_CLASS &&
-		!exposeOptions.toClass
-	) {
+	if (transformType === TransformType.TO_CLASS && !exposeOptions.toClass) {
 		return false;
 	}
 	return !(
