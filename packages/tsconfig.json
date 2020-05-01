@@ -10,6 +10,9 @@
         },
         {
             "path": "./transformer/tsconfig.build.json"
+        },
+        {
+            "path": "./babel-plugin-add-class-properties/tsconfig.build.json"
         }
     ]
 }
