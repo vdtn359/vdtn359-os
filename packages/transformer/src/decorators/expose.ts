@@ -18,6 +18,22 @@ export type ExposeOptions = {
 
 export function ExposeAll(): ClassDecorator {
 	return (target) => {
+		const properties = target['__PROPERTIES__'] || [];
+		if (properties.length) {
+			const metadata = Reflect.getMetadata(METADATA_KEY, target);
+			for (const property of properties) {
+				if (!metadata.get(property)) {
+					metadata.set(property, {
+						...defaultOptions,
+						type: Reflect.getMetadata(
+							'design:type',
+							target,
+							property
+						),
+					});
+				}
+			}
+		}
 		return target;
 	};
 }
