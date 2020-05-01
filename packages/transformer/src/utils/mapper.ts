@@ -39,8 +39,19 @@ export class Mapper {
 		if (destinationMetadata) {
 			for (const [key, value] of destinationMetadata.entries()) {
 				const nestedMeta = getMetadataFromType(value.type);
-				const as = value.as || key;
-				const fromType = sourceMetadata?.get(as)?.type;
+				let as = value.as || key;
+				let fromType = undefined;
+				if (sourceMetadata) {
+					const foundEntry = Array.from(
+						sourceMetadata.entries()
+					).find(([, value]) => {
+						return value.as === as;
+					});
+					if (foundEntry) {
+						as = foundEntry[0];
+						fromType = foundEntry[1].type;
+					}
+				}
 				this.mappings.set(as, {
 					to: key,
 					mapper: nestedMeta

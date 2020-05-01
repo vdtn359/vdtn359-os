@@ -17,8 +17,19 @@ export class CustomDto {
 	@Expose()
 	customAlias: string;
 
-	@Expose()
-	number: number;
+	@Expose({
+		type: Number,
+		as: 'number',
+	})
+	private _number: number;
+
+	set number(number) {
+		this._number = number;
+	}
+
+	get number() {
+		return this._number;
+	}
 
 	@Expose()
 	inner: InnerDto;

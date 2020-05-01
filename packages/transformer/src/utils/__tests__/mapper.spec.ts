@@ -436,11 +436,12 @@ describe('Mapper', () => {
 		const customDto = mapper.transform(custom);
 		expect(customDto).toBeInstanceOf(CustomDto);
 		expect(customDto.inner).toBeInstanceOf(InnerDto);
+		expect(customDto.number).toEqual(1);
 		expect(JSON.stringify(customDto)).toEqual(
 			JSON.stringify({
 				customAlias: 'customName',
 				alias: 'Name',
-				number: 1,
+				_number: 1,
 				inner: { a: 'a', c: 'b' },
 			})
 		);
