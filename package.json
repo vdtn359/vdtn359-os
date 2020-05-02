@@ -79,6 +79,7 @@
         "prettier": "2.0.2"
     },
     "dependencies": {
+        "@vdtn359/tsc-add-class-properties": "file:packages/tsc-add-class-properties",
         "@vdtn359/utils": "file:packages/utils",
         "@vdtn359/transformer": "file:packages/transformer",
         "@vdtn359/semantic-release-monorepo": "file:packages/semantic-release-monorepo",
