@@ -49,7 +49,7 @@
         "@babel/preset-typescript": "7.9.0",
         "@types/jest": "25.1.4",
         "@types/node": "^13.9.2",
-        "@vdtn359/semantic-release-monorepo": "1.0.0",
+        "@vdtn359/mono-install": "1.1.2",
         "@zerollup/ts-transform-paths": "1.7.12",
         "babel-plugin-tester": "9.0.1",
         "lerna": "^3.20.2",
