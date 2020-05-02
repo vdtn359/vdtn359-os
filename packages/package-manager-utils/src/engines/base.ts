@@ -3,8 +3,8 @@ import fs from 'fs';
 import { DEPENDENCY_TYPES } from 'src/engines/constants';
 import { DependencyNode, Engine } from 'src/engines/engine';
 import { DepGraph } from 'dependency-graph';
-import { resolveLocalVersion } from 'src/package';
-import { writeJson } from 'src/files';
+import { resolveLocalVersion } from 'src/lib/package';
+import { writeJson } from 'src/lib/files';
 
 export abstract class BaseEngine implements Engine {
 	getDependencyGraph(packagePath): DepGraph<DependencyNode> {

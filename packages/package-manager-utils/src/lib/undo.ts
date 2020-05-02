@@ -1,7 +1,7 @@
 const fsExtra = require('fs-extra');
 import fs from 'fs';
 import { promisify } from 'util';
-import { read, write } from 'src/files';
+import { read, write } from 'src/lib/files';
 
 const existsAsync = promisify(fs.exists).bind(fs);
 

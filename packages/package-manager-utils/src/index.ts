@@ -1,2 +1,2 @@
-export * from './package';
+export * from './lib/package';
 export * from './engines';

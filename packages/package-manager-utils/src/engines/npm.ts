@@ -1,10 +1,10 @@
 import path from 'path';
 import { DEPENDENCY_TYPES } from 'src/engines/constants';
-import { resolveLocalVersion } from 'src/package';
+import { resolveLocalVersion } from 'src/lib/package';
 import { BaseEngine } from 'src/engines/base';
 import fs from 'fs';
-import { readJson, writeJson } from 'src/files';
-import { execSync } from 'src/child_process';
+import { readJson, writeJson } from 'src/lib/files';
+import { execSync } from 'src/lib/child_process';
 
 const isInstalled = require('is-installed');
 

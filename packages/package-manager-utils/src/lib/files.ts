@@ -1,6 +1,5 @@
 import fs from 'fs';
-
-const yaml = require('yaml');
+import yaml from 'yaml';
 
 export function readJson(jsonPath) {
 	return JSON.parse(
@@ -25,7 +24,7 @@ export function readYml(jsonPath) {
 }
 
 export function writeYml(jsonPath, value) {
-	fs.writeFileSync(jsonPath, yaml.stringify(value, null, 4), {
+	fs.writeFileSync(jsonPath, yaml.stringify(value), {
 		encoding: 'utf-8',
 	});
 }
