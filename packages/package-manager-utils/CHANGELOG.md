@@ -1,3 +1,10 @@
+# [@vdtn359/package-manager-utils-v1.0.3](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/package-manager-utils-v1.0.2...@vdtn359/package-manager-utils-v1.0.3) (2020-05-02)
+
+
+### Bug Fixes
+
+* **package-manager-utils:** only publish dist folder ([7bb7b6a](https://github.com/vdtn359/vdtn359-os/commit/7bb7b6a7f4b039ed2efe968ddf7ea1564e1169b6))
+
 # [@vdtn359/package-manager-utils-v1.0.2](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/package-manager-utils-v1.0.1...@vdtn359/package-manager-utils-v1.0.2) (2020-05-02)
 
 
