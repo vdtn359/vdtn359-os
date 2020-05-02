@@ -10,6 +10,6 @@ jobs:
       script:
         - npm install
         - npm run test:coverage
-    - stage: deploy
+    - stage: publish
       if: branch = master
       script: npm run release
