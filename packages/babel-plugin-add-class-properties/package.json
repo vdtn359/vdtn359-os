@@ -9,6 +9,5 @@
     ],
     "scripts": {
         "build": "ttsc -b tsconfig.build.json"
-    },
-    "gitHead": "a76be6cc1486c90c6f81c90e5b57ce4838e50813"
+    }
 }

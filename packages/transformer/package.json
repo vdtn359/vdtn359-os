@@ -1,6 +1,6 @@
 {
     "name": "@vdtn359/transformer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Tuan's transformer utils",
     "type": "dist/index.d.ts",
     "main": "dist/index.js",
@@ -12,6 +12,5 @@
     },
     "dependencies": {
         "reflect-metadata": "0.1.13"
-    },
-    "gitHead": "a76be6cc1486c90c6f81c90e5b57ce4838e50813"
+    }
 }
