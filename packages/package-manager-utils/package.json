@@ -1,6 +1,9 @@
 {
     "name": "@vdtn359/package-manager-utils",
     "version": "1.0.2",
+    "files": [
+        "dist"
+    ],
     "description": "package manager utils",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
