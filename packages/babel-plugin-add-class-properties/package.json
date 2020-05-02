@@ -1,6 +1,6 @@
 {
     "name": "babel-plugin-add-class-properties",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Add class properties information to each class",
     "type": "dist/index.d.ts",
     "main": "dist/index.js",
