@@ -1,3 +1,10 @@
+# [@vdtn359/transformer-v1.0.1](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/transformer-v1.0.0...@vdtn359/transformer-v1.0.1) (2020-05-02)
+
+
+### Bug Fixes
+
+* **transformer:** forced package change ([8b4f831](https://github.com/vdtn359/vdtn359-os/commit/8b4f83140c5dc618ab3b11a7ea969c2fdc736baf))
+
 # @vdtn359/transformer-v1.0.0 (2020-05-02)
 
 
