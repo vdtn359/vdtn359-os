@@ -4,7 +4,7 @@
     "files": [
         "dist"
     ],
-    "description": "package manager utils",
+    "description": "npm package manager utils",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "dependencies": {
