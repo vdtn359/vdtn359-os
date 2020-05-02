@@ -1,3 +1,10 @@
+# [@vdtn359/package-manager-utils-v1.0.4](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/package-manager-utils-v1.0.3...@vdtn359/package-manager-utils-v1.0.4) (2020-05-02)
+
+
+### Bug Fixes
+
+* **package-manager-utils:** update description ([94c8ba6](https://github.com/vdtn359/vdtn359-os/commit/94c8ba623df40a7a5b0d87266d4ffc583076ba5e))
+
 # [@vdtn359/package-manager-utils-v1.0.3](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/package-manager-utils-v1.0.2...@vdtn359/package-manager-utils-v1.0.3) (2020-05-02)
 
 
