@@ -1,3 +1,10 @@
+# [@vdtn359/semantic-release-monorepo-v1.0.3](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/semantic-release-monorepo-v1.0.2...@vdtn359/semantic-release-monorepo-v1.0.3) (2020-05-02)
+
+
+### Bug Fixes
+
+* **release:** add semantic release exec ([f3e3489](https://github.com/vdtn359/vdtn359-os/commit/f3e34895fe09557939046d4b31e4aa59d67b97ed))
+
 # [@vdtn359/semantic-release-monorepo-v1.0.2](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/semantic-release-monorepo-v1.0.1...@vdtn359/semantic-release-monorepo-v1.0.2) (2020-05-02)
 
 
