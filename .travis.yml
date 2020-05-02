@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 10
+cache:
+  directories:
+    - ~/.npm
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm install
+        - npm run test:coverage
+    - stage: deploy
+      if: branch = master
+      script: npm run release

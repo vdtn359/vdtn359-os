@@ -16,6 +16,12 @@
         },
         {
             "path": "./tsc-add-class-properties/tsconfig.build.json"
+        },
+        {
+            "path": "./package-manager-utils/tsconfig.build.json"
+        },
+        {
+            "path": "./semantic-release-monorepo/tsconfig.build.json"
         }
     ]
 }

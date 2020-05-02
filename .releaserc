@@ -16,5 +16,6 @@
       "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
     }
     ]
-  ]
+  ],
+  "repositoryUrl": "git@github.com:vdtn359/vdtn359-os.git"
 }

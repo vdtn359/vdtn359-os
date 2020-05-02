@@ -1,0 +1,14 @@
+{
+    "name": "@vdtn359/package-manager-utils",
+    "version": "1.0.0",
+    "description": "package manager utils",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "dependencies": {
+        "dependency-graph": "0.9.0",
+        "fast-glob": "3.2.2",
+        "fs-extra": "9.0.0",
+        "is-installed": "2.0.1",
+        "yaml": "1.9.2"
+    }
+}
