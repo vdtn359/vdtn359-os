@@ -13,6 +13,9 @@
         },
         {
             "path": "./babel-plugin-add-class-properties/tsconfig.build.json"
+        },
+        {
+            "path": "./tsc-add-class-properties/tsconfig.build.json"
         }
     ]
 }

@@ -26,6 +26,7 @@ module.exports = (dirname) => {
 		}),
 		globals: {
 			'ts-jest': {
+				compiler: 'ttypescript',
 				diagnostics: false,
 				tsconfig: `${dirname}/tsconfig.json`,
 			},
