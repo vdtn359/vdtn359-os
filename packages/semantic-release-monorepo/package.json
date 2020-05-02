@@ -2,8 +2,8 @@
     "name": "@vdtn359/semantic-release-monorepo",
     "version": "1.0.2",
     "description": "Plugins for `semantic-release` allowing it to be used with a monorepo.",
-    "types": "dist/index.d.ts",
     "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "license": "MIT",
     "files": [
         "dist"

@@ -4,17 +4,30 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    "@semantic-release/npm",
-    ["@semantic-release/git", {
-      "assets": [
-        "package.json",
-        "package-lock.json",
-        "CHANGELOG.md",
-        "index.js",
-        "lib/**/*.js"
-      ],
-      "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-    }
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json",
+          "package-lock.json",
+          "CHANGELOG.md",
+          "index.js",
+          "lib/**/*.js"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "publishCmd": "test `cat package.json | jq '.private == true'` != 'true' && pnpm publish || true"
+      }
     ]
   ],
   "repositoryUrl": "git@github.com:vdtn359/vdtn359-os.git"
