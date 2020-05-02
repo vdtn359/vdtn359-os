@@ -1,3 +1,10 @@
+# [@vdtn359/utils-v1.0.2](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/utils-v1.0.1...@vdtn359/utils-v1.0.2) (2020-05-02)
+
+
+### Bug Fixes
+
+* **utils:** forced new version ([9c4ffff](https://github.com/vdtn359/vdtn359-os/commit/9c4ffff621b09640539c5c4ddafa89cde980b3fc))
+
 # [@vdtn359/utils-v1.0.1](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/utils-v1.0.0...@vdtn359/utils-v1.0.1) (2020-05-02)
 
 
