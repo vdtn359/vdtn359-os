@@ -1,3 +1,10 @@
+# [babel-plugin-add-class-properties-v1.0.1](https://github.com/vdtn359/vdtn359-os/compare/babel-plugin-add-class-properties-v1.0.0...babel-plugin-add-class-properties-v1.0.1) (2020-05-02)
+
+
+### Bug Fixes
+
+* **babel-plugin-add-class-properties:** forced package change ([96dcbe5](https://github.com/vdtn359/vdtn359-os/commit/96dcbe5918b3f082b93343f70fc7adda9b14f2fa))
+
 # babel-plugin-add-class-properties-v1.0.0 (2020-05-02)
 
 
