@@ -8,7 +8,6 @@ jobs:
   include:
     - stage: test
       script:
-        - npm install
         - npm run test:coverage
     - stage: publish
       if: branch = master
