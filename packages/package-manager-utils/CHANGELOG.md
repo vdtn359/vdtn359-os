@@ -1,3 +1,10 @@
+# [@vdtn359/package-manager-utils-v1.0.2](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/package-manager-utils-v1.0.1...@vdtn359/package-manager-utils-v1.0.2) (2020-05-02)
+
+
+### Bug Fixes
+
+* **package-manager-utils:** reorganize folder structure ([5e5f118](https://github.com/vdtn359/vdtn359-os/commit/5e5f118b5fc62c99d5b6193ecaf6fc5b88ba5002))
+
 # [@vdtn359/package-manager-utils-v1.0.1](https://github.com/vdtn359/vdtn359-os/compare/@vdtn359/package-manager-utils-v1.0.0...@vdtn359/package-manager-utils-v1.0.1) (2020-05-02)
 
 
