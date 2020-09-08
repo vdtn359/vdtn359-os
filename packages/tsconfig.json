@@ -22,6 +22,9 @@
         },
         {
             "path": "./semantic-release-monorepo/tsconfig.build.json"
+        },
+        {
+            "path": "./url/tsconfig.build.json"
         }
     ]
 }
