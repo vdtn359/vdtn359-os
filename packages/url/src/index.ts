@@ -4,6 +4,7 @@ import pick from 'lodash.pick';
 import omitBy from 'lodash.omitby';
 
 type KeyValueType = Record<string, string | string[] | null | undefined>;
+
 class KeyValueFormat {
 	private _valueMap: Record<string, string | string[]>;
 
